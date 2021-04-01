@@ -11,17 +11,16 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 ### 🎲 Rodando o Back End (servidor)
 
 ```bash
-# Após baixar o projeto abra o arquivo .sln
-$ npm install
+# Após baixar o projeto abra o arquivo .sln e clicar em execução
 
-# Execute a aplicação em modo de desenvolvimento
-$ npm start
+# Caso dê erro. Voce precisara excluir a pasta .vs e iniciar o projeto novamente.
 
-# O servidor inciará na porta:3232 - acesse <http://localhost:3232>
+# O servidor inciará na porta:44391 - acesse <https://localhost:44391/swagger/index.html>
+# você pode alterar o arquivo de launchSettings.json e alterar pra uma porta de sua escolha
 ```
 
 ### 🛠 Tecnologias
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-- [C#](https://nodejs.org/en/) ![Badge](https://img.shields.io/badge/ASPNETCORE-V5-blue)
+- [C#](https://docs.microsoft.com/pt-br/dotnet/csharp/) ![Badge](https://img.shields.io/badge/ASPNETCORE-V5-blue) ![Badge](https://img.shields.io/badge/DTO-blue)
