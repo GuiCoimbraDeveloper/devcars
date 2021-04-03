@@ -25,8 +25,11 @@ namespace DevCars.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<Car> cars = _dbContext.Cars;
-            List<CarItemViewModel> carsViewModel = cars.Select(c => new CarItemViewModel(c.Id, c.Brand, c.Model, c.Price)).ToList();
+            List<Car> cars = _dbContext.Cars.ToList();
+            List<CarItemViewModel> carsViewModel = cars
+                .Where(c => c.Status == CarStatusEnum.Available)
+                .Select(c => new CarItemViewModel(c.Id, c.Brand, c.Model, c.Price))
+                .ToList();
 
             return Ok(carsViewModel);
         }
@@ -54,40 +57,41 @@ namespace DevCars.Api.Controllers
 
         // POST api/cars
         [HttpPost]
-        public IActionResult Post([FromBody] AddCarInputModels model)
+        public async Task<IActionResult> PostAsync([FromBody] AddCarInputModels model)
         {
             if (model.Model.Length > 50)
                 return BadRequest("Modelo não pode ter mais de 50 caracteres.");
-            
-            Car car = new Car(4, model.VinCode, model.Brand, model.Model, model.Year, model.Price, model.Color, model.ProductionDate);
-            
-            _dbContext.Cars.Add(car);       
 
+            Car car = new Car(model.VinCode, model.Brand, model.Model, model.Year, model.Price, model.Color, model.ProductionDate);
+
+            _dbContext.Cars.Add(car);
+            await _dbContext.SaveChangesAsync();
             return CreatedAtAction(nameof(GetById), new { id = car.Id }, model);
         }
 
         // PUT api/cars
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateCarInputModels model)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] UpdateCarInputModels model)
         {
             Car car = _dbContext.Cars.SingleOrDefault(c => c.Id == id);
             if (car == null)
                 return NotFound();
 
-            car.Update(model.Color,model.Price);
+            car.Update(model.Color, model.Price);
+            await _dbContext.SaveChangesAsync();
             return NoContent();
         }
 
         // DELETE api/cars/1
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             Car car = _dbContext.Cars.SingleOrDefault(c => c.Id == id);
             if (car == null)
                 return NotFound();
 
             car.SetAsSuspended();
-
+            await _dbContext.SaveChangesAsync();
             return NoContent();
         }
     }

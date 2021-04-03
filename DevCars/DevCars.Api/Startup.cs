@@ -1,17 +1,11 @@
 using DevCars.Api.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DevCars.Api
 {
@@ -27,7 +21,11 @@ namespace DevCars.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<DevCarsDbContext>();
+            var connectionString = Configuration.GetConnectionString("DevCarsCs");
+            services.AddDbContext<DevCarsDbContext>(options => options.UseSqlServer(connectionString));
+
+            //para usar o banco de dados em memoria
+            //services.AddDbContext<DevCarsDbContext>(options => options.UseInMemoryDatabase("DevCars"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

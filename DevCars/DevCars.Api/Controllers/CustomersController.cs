@@ -4,6 +4,7 @@ using DevCars.Api.Persistence;
 using DevCars.Api.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,9 @@ namespace DevCars.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] AddCustomerInputModels model)
         {
-            var customer = new Customer(4, model.FullName, model.Document, model.BirthDate);
+            var customer = new Customer(model.FullName, model.Document, model.BirthDate);
             _dbContext.Customers.Add(customer);
+            _dbContext.SaveChanges();
             return Ok();
         }
 
@@ -38,24 +40,25 @@ namespace DevCars.Api.Controllers
             var extraItems = model.ExtraItems.Select(i => new ExtraOrderItem(i.Description, i.Price)).ToList();
             var car = _dbContext.Cars.SingleOrDefault(c => c.Id == model.IdCar);
 
-            var order = new Order(1, model.IdCar, model.IdCustomer, car.Price, extraItems);
+            var order = new Order(model.IdCar, model.IdCustomer, car.Price, extraItems);
 
-            var customer = _dbContext.Customers.SingleOrDefault(a => a.Id == model.IdCustomer);
-            customer.Purchase(order);
+            _dbContext.Orders.Add(order);
+            _dbContext.SaveChanges();
 
-            return CreatedAtAction(nameof(GetOrder), new { id = customer.Id, orderid = order.Id }, model);
+            return CreatedAtAction(nameof(GetOrder), new { id = order.IdCustomer, orderid = order.Id }, model);
         }
 
         // GET api/customers/1/orders/3
         [HttpGet("{id}/orders/{orderid}")]
         public IActionResult GetOrder(int id, int orderid)
         {
-            var customer = _dbContext.Customers.SingleOrDefault(a => a.Id == id);
+            var order = _dbContext.Orders
+                .Include(c => c.ExtraItems)
+                .SingleOrDefault(o => o.Id == orderid);
 
-            if (customer == null)
+            if (order == null)
                 return NotFound();
 
-            var order = customer.Orders.SingleOrDefault(o => o.Id == orderid);
 
             var extraItems = order.ExtraItems.Select(a => a.Description).ToList();
 
