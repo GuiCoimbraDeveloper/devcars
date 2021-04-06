@@ -60,3 +60,6 @@ C:\Users\guilh\source\repos\devcars\DevCars\DevCars.Api\obj\Debug\net5.0\DevCars
 C:\Users\guilh\source\repos\devcars\DevCars\DevCars.Api\obj\Debug\net5.0\ref\DevCars.Api.dll
 C:\Users\guilh\source\repos\devcars\DevCars\DevCars.Api\obj\Debug\net5.0\DevCars.Api.pdb
 C:\Users\guilh\source\repos\devcars\DevCars\DevCars.Api\obj\Debug\net5.0\DevCars.Api.genruntimeconfig.cache
+C:\Users\guilh\source\repos\devcars\DevCars\DevCars.Api\bin\Debug\net5.0\DevCars.Api.xml
+C:\Users\guilh\source\repos\devcars\DevCars\DevCars.Api\bin\Debug\net5.0\Dapper.dll
+C:\Users\guilh\source\repos\devcars\DevCars\DevCars.Api\obj\Debug\net5.0\DevCars.Api.xml

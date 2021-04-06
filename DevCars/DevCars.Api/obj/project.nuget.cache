@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1e6fxRuPa2hsXvKQQKze05fFaq62rzjeigbZNhs0Zr+bXk0V3l2pzxEfrK/kL+bIxjjWBPmx5dC7nbIbIW4ozQ==",
+  "dgSpecHash": "CZm2IVeyn74zf4CGElDnXyCMEO5HqjDiIhpKHSIBzIX/k10sE+iZMvB8FbivLyRGeSI5lqDwhUxbRmiVEMtpLA==",
   "success": true,
   "projectFilePath": "C:\\Users\\guilh\\source\\repos\\devcars\\DevCars\\DevCars.Api\\DevCars.Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\guilh\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
