@@ -1,7 +1,7 @@
 # dev-cars
 
 ## Descrição do Projeto
-<p>projeto rest API para venda de carros. O projeto foi criado usando o ASPNET CORE 5</p>
+<p>projeto rest API para controle de sua saude. O projeto foi criado usando o ASPNET 5</p>
 
 ### Pré-requisitos
 
